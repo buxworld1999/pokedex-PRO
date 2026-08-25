@@ -13,6 +13,7 @@ interface Props {
     official: string | null;
     officialShiny: string | null;
     home: string | null;
+    homeShiny: string | null;
     default: string | null;
     shiny: string | null;
     showdown: string | null;
