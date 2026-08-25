@@ -68,11 +68,11 @@ export async function getPokemonDetails(name: string) {
       sprites: {
         official: pokemon.sprites.other["official-artwork"].front_default,
         officialShiny: pokemon.sprites.other["official-artwork"].front_shiny,
-        home: pokemon.sprites.other.home?.front_default,
-        homeShiny: pokemon.sprites.other.home?.front_shiny,
+        home: pokemon.sprites.other.home?.front_default ?? null,
+        homeShiny: pokemon.sprites.other.home?.front_shiny ?? null,
         default: pokemon.sprites.front_default,
         shiny: pokemon.sprites.front_shiny,
-        showdown: pokemon.sprites.other.showdown?.front_default,
+        showdown: pokemon.sprites.other.showdown?.front_default ?? null,
       },
 
       // Info básica
