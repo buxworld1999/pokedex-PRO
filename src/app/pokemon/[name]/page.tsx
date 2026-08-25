@@ -10,18 +10,11 @@ import BestWayCard from "@/components/pokemon/BestWayCard";
 import CollectorInfo from "@/components/pokemon/CollectorInfo";
 import { TYPE_COLORS } from "@/lib/constants/type-colors";
 
+import { getPokemonDetails } from "@/lib/services/pokemon";
+
 // Server-side data fetch
 async function getPokemonData(name: string) {
-  const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || (process.env.VERCEL_URL ? `https://${process.env.VERCEL_URL}` : "http://localhost:3000");
-  try {
-    const res = await fetch(`${baseUrl}/api/pokemon/${name}`, {
-      next: { revalidate: 3600 },
-    });
-    if (!res.ok) return null;
-    return res.json();
-  } catch {
-    return null;
-  }
+  return await getPokemonDetails(name);
 }
 
 export async function generateMetadata({
