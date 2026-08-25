@@ -1,26 +1,269 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  /* Primary Pokédex color palette */
+  --poke-red: #cc0000;
+  --poke-red-light: #ff1a1a;
+  --poke-dark: #0a0a0f;
+  --poke-darker: #050508;
+  --poke-surface: #12121a;
+  --poke-surface-2: #1a1a28;
+  --poke-surface-3: #22223a;
+  --poke-border: rgba(255, 255, 255, 0.08);
+  --poke-border-hover: rgba(255, 255, 255, 0.15);
+
+  /* Text */
+  --text-primary: #f1f5f9;
+  --text-secondary: #94a3b8;
+  --text-muted: #64748b;
+
+  /* Glow effects */
+  --glow-red: 0 0 20px rgba(204, 0, 0, 0.4);
+  --glow-blue: 0 0 20px rgba(59, 130, 246, 0.4);
+  --glow-yellow: 0 0 20px rgba(251, 191, 36, 0.4);
+
+  /* Animations */
+  --transition-fast: 150ms cubic-bezier(0.4, 0, 0.2, 1);
+  --transition-base: 250ms cubic-bezier(0.4, 0, 0.2, 1);
+  --transition-slow: 400ms cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+.light {
+  --poke-dark: #f8fafc;
+  --poke-darker: #f1f5f9;
+  --poke-surface: #ffffff;
+  --poke-surface-2: #f8fafc;
+  --poke-surface-3: #f1f5f9;
+  --poke-border: rgba(0, 0, 0, 0.08);
+  --poke-border-hover: rgba(0, 0, 0, 0.15);
+  --text-primary: #0f172a;
+  --text-secondary: #475569;
+  --text-muted: #94a3b8;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: "Inter", "Outfit", system-ui, sans-serif;
+  background-color: var(--poke-dark);
+  color: var(--text-primary);
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+/* Scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+::-webkit-scrollbar-track {
+  background: var(--poke-darker);
+}
+::-webkit-scrollbar-thumb {
+  background: var(--poke-surface-3);
+  border-radius: 3px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 255, 255, 0.2);
+}
+
+/* Glass effect utility */
+.glass {
+  background: rgba(255, 255, 255, 0.04);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid var(--poke-border);
+}
+
+.glass-strong {
+  background: rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid var(--poke-border-hover);
+}
+
+/* Pokédex gradient backgrounds */
+.gradient-pokedex {
+  background: linear-gradient(135deg, #0a0a0f 0%, #1a0510 50%, #0a0a1f 100%);
+}
+
+/* Type badge base */
+.type-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;
+  padding: 0.25rem 0.75rem;
+  border-radius: 9999px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  transition: all var(--transition-fast);
+}
+
+/* Stat bar animation */
+@keyframes statBar {
+  from { width: 0%; }
+  to { width: var(--stat-width); }
+}
+
+.stat-bar-fill {
+  animation: statBar 1s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+}
+
+/* Pokéball spinner */
+@keyframes pokeball-spin {
+  from { transform: rotate(0deg); }
+  to   { transform: rotate(360deg); }
+}
+
+.pokeball-spinner {
+  animation: pokeball-spin 1s linear infinite;
+}
+
+/* Floating animation */
+@keyframes float {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-8px); }
+}
+
+.float-animation {
+  animation: float 3s ease-in-out infinite;
+}
+
+/* Shine effect on hover */
+@keyframes shine {
+  from { background-position: 200% center; }
+  to   { background-position: -200% center; }
+}
+
+.card-shine {
+  background: linear-gradient(90deg, transparent 25%, rgba(255,255,255,0.05) 50%, transparent 75%);
+  background-size: 200% auto;
+}
+
+.card-shine:hover {
+  animation: shine 2s linear infinite;
+}
+
+/* Pulse glow */
+@keyframes pulseGlow {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.6; }
+}
+
+.pulse-glow {
+  animation: pulseGlow 2s ease-in-out infinite;
+}
+
+/* Grid shimmer loading */
+@keyframes shimmer {
+  from { background-position: -1000px 0; }
+  to   { background-position: 1000px 0; }
+}
+
+.shimmer {
+  background: linear-gradient(90deg, var(--poke-surface) 25%, var(--poke-surface-3) 50%, var(--poke-surface) 75%);
+  background-size: 1000px 100%;
+  animation: shimmer 1.5s infinite;
+}
+
+/* Focus ring */
+:focus-visible {
+  outline: 2px solid var(--poke-red);
+  outline-offset: 2px;
+}
+
+/* Section title */
+.section-title {
+  font-family: "Outfit", sans-serif;
+  font-size: 1.25rem;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  color: var(--text-primary);
+}
+
+/* Divider */
+.divider {
+  border-color: var(--poke-border);
+}
+
+/* Pokemon card hover */
+.pokemon-card {
+  transition: transform var(--transition-base), box-shadow var(--transition-base);
+}
+
+.pokemon-card:hover {
+  transform: translateY(-4px) scale(1.02);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+}
+
+/* Table styles */
+.poke-table {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0;
+}
+
+.poke-table th {
+  background: var(--poke-surface-3);
+  color: var(--text-secondary);
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  padding: 0.75rem 1rem;
+  text-align: left;
+}
+
+.poke-table th:first-child { border-radius: 0.5rem 0 0 0.5rem; }
+.poke-table th:last-child  { border-radius: 0 0.5rem 0.5rem 0; }
+
+.poke-table td {
+  padding: 0.75rem 1rem;
+  border-bottom: 1px solid var(--poke-border);
+  font-size: 0.875rem;
+  color: var(--text-primary);
+}
+
+.poke-table tr:hover td {
+  background: rgba(255, 255, 255, 0.02);
+}
+
+/* Tooltip */
+.tooltip {
+  position: relative;
+}
+
+.tooltip::after {
+  content: attr(data-tooltip);
+  position: absolute;
+  bottom: 100%;
+  left: 50%;
+  transform: translateX(-50%) translateY(-4px);
+  background: var(--poke-surface-3);
+  color: var(--text-primary);
+  font-size: 0.75rem;
+  padding: 0.25rem 0.5rem;
+  border-radius: 0.25rem;
+  white-space: nowrap;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity var(--transition-fast);
+  border: 1px solid var(--poke-border);
+  z-index: 50;
+}
+
+.tooltip:hover::after {
+  opacity: 1;
 }

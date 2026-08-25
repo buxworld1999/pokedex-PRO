@@ -1,0 +1,48 @@
+// Colores por tipo Pokémon - matching game colors
+export const TYPE_COLORS: Record<string, { bg: string; text: string; border: string; gradient: string; hex: string }> = {
+  normal:   { bg: "bg-stone-400",    text: "text-stone-900",  border: "border-stone-500",   gradient: "from-stone-400 to-stone-500",     hex: "#A8A878" },
+  fire:     { bg: "bg-orange-500",   text: "text-white",      border: "border-orange-600",  gradient: "from-orange-500 to-red-600",       hex: "#F08030" },
+  water:    { bg: "bg-blue-500",     text: "text-white",      border: "border-blue-600",    gradient: "from-blue-400 to-blue-600",        hex: "#6890F0" },
+  electric: { bg: "bg-yellow-400",   text: "text-yellow-900", border: "border-yellow-500",  gradient: "from-yellow-300 to-yellow-500",    hex: "#F8D030" },
+  grass:    { bg: "bg-green-500",    text: "text-white",      border: "border-green-600",   gradient: "from-green-400 to-green-600",      hex: "#78C850" },
+  ice:      { bg: "bg-cyan-400",     text: "text-cyan-900",   border: "border-cyan-500",    gradient: "from-cyan-300 to-cyan-500",        hex: "#98D8D8" },
+  fighting: { bg: "bg-red-700",      text: "text-white",      border: "border-red-800",     gradient: "from-red-600 to-red-800",          hex: "#C03028" },
+  poison:   { bg: "bg-purple-500",   text: "text-white",      border: "border-purple-600",  gradient: "from-purple-500 to-purple-700",    hex: "#A040A0" },
+  ground:   { bg: "bg-amber-600",    text: "text-white",      border: "border-amber-700",   gradient: "from-amber-500 to-amber-700",      hex: "#E0C068" },
+  flying:   { bg: "bg-indigo-400",   text: "text-white",      border: "border-indigo-500",  gradient: "from-indigo-300 to-indigo-500",    hex: "#A890F0" },
+  psychic:  { bg: "bg-pink-500",     text: "text-white",      border: "border-pink-600",    gradient: "from-pink-400 to-pink-600",        hex: "#F85888" },
+  bug:      { bg: "bg-lime-500",     text: "text-white",      border: "border-lime-600",    gradient: "from-lime-400 to-lime-600",        hex: "#A8B820" },
+  rock:     { bg: "bg-yellow-700",   text: "text-white",      border: "border-yellow-800",  gradient: "from-yellow-600 to-yellow-800",    hex: "#B8A038" },
+  ghost:    { bg: "bg-violet-700",   text: "text-white",      border: "border-violet-800",  gradient: "from-violet-600 to-violet-800",    hex: "#705898" },
+  dragon:   { bg: "bg-blue-800",     text: "text-white",      border: "border-blue-900",    gradient: "from-blue-700 to-indigo-900",      hex: "#7038F8" },
+  dark:     { bg: "bg-gray-800",     text: "text-white",      border: "border-gray-900",    gradient: "from-gray-700 to-gray-900",        hex: "#705848" },
+  steel:    { bg: "bg-slate-500",    text: "text-white",      border: "border-slate-600",   gradient: "from-slate-400 to-slate-600",      hex: "#B8B8D0" },
+  fairy:    { bg: "bg-pink-300",     text: "text-pink-900",   border: "border-pink-400",    gradient: "from-pink-300 to-rose-400",        hex: "#EE99AC" },
+  stellar:  { bg: "bg-cyan-500",     text: "text-white",      border: "border-cyan-600",    gradient: "from-cyan-400 to-blue-600",        hex: "#40BFFF" },
+  unknown:  { bg: "bg-gray-400",     text: "text-gray-900",   border: "border-gray-500",    gradient: "from-gray-400 to-gray-500",        hex: "#68A090" },
+};
+
+export const TYPE_NAMES_ES: Record<string, string> = {
+  normal:   "Normal",
+  fire:     "Fuego",
+  water:    "Agua",
+  electric: "Eléctrico",
+  grass:    "Planta",
+  ice:      "Hielo",
+  fighting: "Lucha",
+  poison:   "Veneno",
+  ground:   "Tierra",
+  flying:   "Volador",
+  psychic:  "Psíquico",
+  bug:      "Bicho",
+  rock:     "Roca",
+  ghost:    "Fantasma",
+  dragon:   "Dragón",
+  dark:     "Siniestro",
+  steel:    "Acero",
+  fairy:    "Hada",
+  stellar:  "Estelar",
+  unknown:  "Desconocido",
+};
+
+export const ALL_TYPES = Object.keys(TYPE_COLORS);
