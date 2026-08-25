@@ -12,7 +12,7 @@ import { TYPE_COLORS } from "@/lib/constants/type-colors";
 
 // Server-side data fetch
 async function getPokemonData(name: string) {
-  const baseUrl = process.env.NEXT_PUBLIC_BASE_URL ?? "http://localhost:3000";
+  const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || (process.env.VERCEL_URL ? `https://${process.env.VERCEL_URL}` : "http://localhost:3000");
   try {
     const res = await fetch(`${baseUrl}/api/pokemon/${name}`, {
       next: { revalidate: 3600 },
